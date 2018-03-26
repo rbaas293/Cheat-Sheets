@@ -1,4 +1,4 @@
-## Linux: Finding and Mounting Drives
+## Linux: Finding And Mounting Drives
 **NOTE:** This example will be in the context of mounting a drive with multiple NFTS Partitions on it. replace anyting refering to windows with your context. 
 
 1. Check what your unmounted drive and its partitions are called:
