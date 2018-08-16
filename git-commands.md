@@ -7,6 +7,12 @@ git checkout -b <new-branch-name>
 ```Shell
 git push -u origin <new-branch-name>
 ```
+### Delete Local then Remote Branch 
+```Shell
+git checkout <not-barch-to-be-deleted>
+git branch -b <branch-to-delete>
+git push origin --delete  <branch-to-delete>
+```
 
 ### Ignoring a previously committed file
 *  If you want to ignore a file that you've committed in the past, you'll need to delete the file from your repository and then add a `.gitignore` rule for it. Using the `--cached` option with git rm means that the file will be deleted from your repository, but will remain in your working directory as an ignored file.
