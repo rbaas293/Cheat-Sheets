@@ -17,3 +17,10 @@ concfg import solarized-dark
 
 scoop install pshazz
 ```
+## Scoop has a thing called buckets. These are essensialy additonal sources for more repositories. 
+* you can add a bucket I found online, which includes vivaldi. To do the same past the following into `PowerShell`.
+  - `scoop bucket add vivaldi https://github.com/simonwjackson/my-bucket`
+  
+## Below is the link to a repository that searches github for scoop buckets and then sorts them according to popularity.
+  * https://github.com/tapanchandra/awesome-scoop
+  
