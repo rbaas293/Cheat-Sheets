@@ -9,7 +9,7 @@ git push -u origin <new-branch-name>
 ```
 ### Delete Local then Remote Branch 
 ```Shell
-git checkout <not-barch-to-be-deleted>
+git checkout <not-branch-to-be-deleted>
 git branch -d <branch-to-delete>
 git push origin --delete  <branch-to-delete>
 ```
