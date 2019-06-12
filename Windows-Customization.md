@@ -24,3 +24,5 @@ scoop install pshazz
 ## Below is the link to a repository that searches github for scoop buckets and then sorts them according to popularity.
   * https://github.com/tapanchandra/awesome-scoop
   
+  ## For when you want to make windows the default OS on grub
+  
