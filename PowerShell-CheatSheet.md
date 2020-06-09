@@ -59,5 +59,17 @@ Conditional | PS
     Write-Host "You're really terrible at math, aren’t you?"
     }
 ```
-    
+
+### PATH
+* These snippets provide a quick way to update your environment variables directly from your powershell console. Just copy paste these lines, or even better, add it to your profile as functions.
+
+```Powershell
+# refreshing env in current shell
+$env:path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+
+# adding path to env
+# set path in the $_newPath variable, and it'll get set to your user environment path and persisted.
+$_newPath=""; [System.Environment]::SetEnvironmentVariable("Path", [System.Environment]::GetEnvironmentVariable("Path", "User") + ";${_newPath}", "User")
+```
+
 #### A good resource for PowerShell looping and other things can be found [here](http://www.computerperformance.co.uk/powershell/powershell_loops.htm).
