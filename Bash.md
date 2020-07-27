@@ -20,6 +20,10 @@ parse_args() {
         done
 }
 
+command_exists() {
+        command -v "$@" >/dev/null 2>&1
+}
+
 error() {
         echo ${RED}"Error: $@"${RESET} >&2
 }
