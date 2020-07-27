@@ -33,9 +33,9 @@ verbose() {
 }
 
 write() {
-        #Writes the name of the script along with the print message.
-        echo -e "$0: $@"
+        echo -e "$(echo $0 | grep -P "(?<=\.\/).*" -o): $@"
 }
+
 
 setup_color() {
         # Only use colors if connected to a terminal, unless overide is passed.
