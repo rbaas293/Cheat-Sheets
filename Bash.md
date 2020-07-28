@@ -37,7 +37,7 @@ write() {
 }
 
 setup_color() {
-        # Only use colors if connected to a terminal, unless overide is passed.
+        # Only use colors if connected to a terminal, unless override is passed.
         override=$1
         if [ -t 1 ] || [ ! -z "$override" ] ; then
                 RED=$(printf '\033[31m')
