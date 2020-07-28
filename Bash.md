@@ -64,18 +64,19 @@ need_root() {
 }
 
 check_file() {
-        # Check file or folder existence. Writes to stderr if does not exist.
-        # Exits by default, but second argument can be passed to bypass exit.
-        FILE=$1
-        EXIT=$2
-        if [ ! -e $FILE ]; then
-                error "Path Does Not Exist: $FILE"
-                case $EXIT in
-                        exit|EXIT|E|e) exit 1 ;;
-                        continue|CONTINUE|C|c) ;;
-                        *) exit 1;;
-                esac
-        fi
+	# Check file or folder existence. Writes to stderr if does not exist.
+	# Exits by default, but second argument can be passed to bypass exit.
+	FILE=$1
+	EXIT=$2
+	if [ ! -e $FILE ]; then
+		error "Path Does Not Exist: $FILE"
+		case $EXIT in
+			exit|EXIT|E|e) exit 1 ;;
+			continue|CONTINUE|C|c) return 1 ;;
+			*) exit 1;;
+		esac
+	fi
+        return 0
 }
 
 ```
