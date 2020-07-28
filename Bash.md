@@ -25,7 +25,7 @@ command_exists() {
 }
 
 error() {
-        echo ${RED}"Error: $@"${RESET} >&2
+        echo ${RED}"Error:%{BOLD} $@"${RESET} >&2
 }
 
 verbose() {
