@@ -6,6 +6,35 @@
 # see all netcat proccess
 ps -ef | grep "[n]c"
 
+# Arrays
+## Explicit Declare indexed array
+declare -a my_array
+
+## Explicit declare Associative (Dictionary)
+declare -A my_array
+
+## Assign >1 indexes
+my_array=(foo bar)
+
+## Assign by index number
+my_array[0]=foo
+
+## Print the values of an array
+echo ${my_array[@]} 
+echo ${my_array[*]}
+
+# Get size of an array
+${#my_array[@]}
+
+# Add elements to indexed arrays
+my_array+=(baz foobar)
+my_array+=([baz]=foobar [foobarbaz]=baz)
+
+# Delete elements of arrays
+unset my_array[1]
+unset my_array[foo]
+
+
 ```
 
 ## Functions
