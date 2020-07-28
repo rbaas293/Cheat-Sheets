@@ -33,9 +33,8 @@ verbose() {
 }
 
 write() {
-        echo -e "$(echo $0 | grep -P "(?<=\.\/).*" -o): $@"
+        echo $BOLD"$(basename $0):${RESET} $@"
 }
-
 
 setup_color() {
         # Only use colors if connected to a terminal, unless overide is passed.
