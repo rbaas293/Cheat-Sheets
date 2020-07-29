@@ -102,7 +102,7 @@ parse_all_params() {
     # Parses all arguments passed to a script or function. The varables do not need to be defined beforehand.
     # 
     # If a `-f` true false switch is passed, a varible named `f` is created and set to `yes`.
-	# If a `-f <arg-value>` is passed, a variable named `f` is created and set to `<arg-value>`.
+    # If a `-f <arg-value>` is passed, a variable named `f` is created and set to `<arg-value>`.
     # The functionality above is equivalent for parameters passed with a `--` prefix. e.g. `--force`
     # 
     # Args:        
