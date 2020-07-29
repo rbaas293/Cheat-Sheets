@@ -40,31 +40,6 @@ unset my_array[foo]
 ## Functions
 
 ```bash
-parse_args() {
-        while [ $# -gt 0 ]; do
-                case $1 in
-                        --offline) OFFLINE=yes ;;
-                esac
-                shift
-        done
-}
-
-command_exists() {
-        command -v "$@" >/dev/null 2>&1
-}
-
-error() {
-        echo ${RED}"Error:%{BOLD} $@"${RESET} >&2
-}
-
-verbose() {
-        echo ${YELLOW}"Verbose: "${BOLD}"$@"${RESET}
-}
-
-write() {
-        echo $BOLD"$(basename $0):${RESET} $@"
-}
-
 setup_color() {
         # Only use colors if connected to a terminal, unless override is passed.
         override=$1
@@ -73,8 +48,15 @@ setup_color() {
                 GREEN=$(printf '\033[32m')
                 YELLOW=$(printf '\033[33m')
                 BLUE=$(printf '\033[34m')
+                MAGENTA=$(printf '\033[95m')
+                CYAN=$(printf '\033[36m')
                 BOLD=$(printf '\033[1m')
+                ITALIC=$(printf '\033[3m')
                 RESET=$(printf '\033[m')
+                WARNING=$(printf '\033[93m')
+                HEADER=$(printf '\033[95m')
+                UNDERLINE=$(printf '\033[4m')
+                
         else
                 RED=""
                 GREEN=""
@@ -83,6 +65,83 @@ setup_color() {
                 BOLD=""
                 RESET=""
         fi
+}
+
+setup_color
+
+error() {
+        echo ${BOLD}"$(basename $0):${RESET}${RED} Error   --> ${BOLD}$@"${RESET} >&2
+}
+
+verbose() {
+        if [ "$verbose" = yes ] || [ "$VERBOSE" = yes ] || [ "$v" = yes ] || [ "$V" = yes ]; then
+            echo ${BOLD}"$(basename $0):${RESET}${YELLOW} Verbose --> "${BOLD}"$@"${RESET}
+        fi
+}
+
+debug() {
+        if [ "$debug" = yes ] || [ "$DEBUG" = yes ] || [ "$d" = yes ] || [ "$D" = yes ]; then
+            echo ${BOLD}"$(basename $0):${RESET}${CYAN} Debug   --> "${BOLD}"$@"${RESET}
+        fi
+}
+write() {
+        echo $BOLD"$(basename $0):${RESET} $@"
+}
+
+command_exists() {
+        command -v "$@" >/dev/null 2>&1
+}
+
+beginswith() { case $2 in "$1"*) true;; *) false;; esac; }
+
+checkresult() { if [ $? = 0 ]; then echo TRUE; else echo FALSE; fi; }
+
+exists() { if [ ! -z $1 ]; then true; else false; fi; }
+
+parse_all_params() {
+    # Parses all arguments passed to a script or function. The varables do not need to be defined beforehand.
+    # 
+    # If a `-f` true false switch is passed, a varible named `f` is created and set to `yes`.
+	# If a `-f <arg-value>` is passed, a variable named `f` is created and set to `<arg-value>`.
+    # The functionality above is equivalent for parameters passed with a `--` prefix. e.g. `--force`
+    # 
+    # Args:        
+    #   $@: Inherent form caller script/function.
+    #   --debug : Debug by displaying parameter names and values. 
+    # 
+    # Returns:     
+    #   Dynamic variables based on the name of passed arguments.
+    #
+    debug "-----Params-----"
+    while [ $# -gt 0 ]; do 
+        if expr match $1 '--' > /dev/null;then str_rm='--'; elif expr match $1 '-' > /dev/null; then str_rm='-'; fi
+        name=${1#$str_rm}
+        if expr match $1 '--' > /dev/null || expr match $1 '-' > /dev/null; then
+            if exists $2 && ! beginswith '-'; then
+                value=$2
+                shift
+            else
+                value=yes
+            fi
+        # Uncommenting the following two lines will allow passing a switch without a `-` or `--` prefix. This may induce undefined operation.
+        #else
+            #value=yes
+        fi
+        
+        debug "$name = $value"
+        
+        IFS= read -r -d '' "$name" <<< $value
+        shift
+    done 
+}
+
+parse_args() {
+        while [ $# -gt 0 ]; do
+                case $1 in
+                        --offline) OFFLINE=yes ;;
+                esac
+                shift
+        done
 }
 
 need_root() {
