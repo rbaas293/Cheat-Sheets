@@ -19,6 +19,9 @@ my_array=(foo bar)
 ## Assign by index number
 my_array[0]=foo
 
+## Assign key value pairs
+my_array=( ["moo"]="cow" ["woof"]="dog")
+
 ## Print the values of an array
 echo ${my_array[@]} 
 echo ${my_array[*]}
