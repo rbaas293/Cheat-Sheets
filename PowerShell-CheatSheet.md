@@ -71,5 +71,38 @@ $env:path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";
 # set path in the $_newPath variable, and it'll get set to your user environment path and persisted.
 $_newPath=""; [System.Environment]::SetEnvironmentVariable("Path", [System.Environment]::GetEnvironmentVariable("Path", "User") + ";${_newPath}", "User")
 ```
+### Delete any file 
+```Powershell
+function Remove-Any-File-Force ($Target) {
+    if ( Test-Path -Path "$Target" ){
+        & $env:SystemRoot\System32\ATTRIB.exe -S -H -R "$Target" >$null 2>$null
+    } else {
+        return
+    }
+    $TargetAttributes = (Get-Item -Path $Target -Force).Attributes.ToString()
+    if ($TargetAttributes -match "ReparsePoint") {
+        if ($TargetAttributes -match "Archive") {
+            Remove-Item -Path "$Target" -Force
+        } else {
+            try {
+                & $env:SystemRoot\System32\cmd.exe /c rmdir /Q "$Target" >$null 2>$null
+            } catch {
+                try {
+                    [io.directory]::Delete("$Target")
+                } catch {
+                    Remove-Item -Path "$Target" -Force
+                }
+            }
+        }    
+    } else {
+        if ($TargetAttributes -match "Directory") {
+            Remove-Item -Path "$Target" -Force -Recurse
+        } else {
+            Remove-Item -Path "$Target" -Force
+        }
+    }
+}
+```
+
 
 #### A good resource for PowerShell looping and other things can be found [here](http://www.computerperformance.co.uk/powershell/powershell_loops.htm).
