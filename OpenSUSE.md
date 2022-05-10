@@ -12,5 +12,5 @@ PKG=$1
 
 zypper download $PKG
 
-cp $(find /home/user/.cache/zypp/packages/ -name "$PKG*") .
+cp $(find ~/.cache/zypp/packages/ -name "$PKG*") .
 ```
