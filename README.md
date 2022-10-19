@@ -18,3 +18,8 @@ Repository for a variety of cheat sheets!
    https://github.com/melvin-mancini/Multitasking-RealTime-Arduino-System.git
    https://github.com/thexeno/DS1307-Emulator-Arduino-Library.git
    https://github.com/zeitgeist87/PinChangeInterruptHandler.git
+
+## Ubuntu new install packages
+```bash
+sudo apt install openvpn nmap binwalk cgcc g++ build-essential net-tools cifs-utils make cmake python python3 python3-pip glances htop
+```
