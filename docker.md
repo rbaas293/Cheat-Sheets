@@ -53,7 +53,9 @@ sudo apt install docker.io
 
 ## Docker Command Line Examples
 
-Pull an image from a docker registry:
+Refrence https://docs.docker.com/engine/reference/commandline/ for extended info.
+
+**Pull an image from a docker registry:**
 
 ```bash
 # Usage
@@ -65,13 +67,13 @@ docker pull roboxes/rhel8:latest
 docker pull myregistry.local:5000/roboxes/rhel8:latest
 ```
 
-See images that have been pulled or imported:
+**See images that have been pulled or imported:**
 
 ```bash
 docker images fedora
 ```
 
-Start a container and attach to its console shell (run in _forground_)
+**Start a container and attach to its console shell (run in _forground_)**
 
 **NOTE**: docker run -i -t --name test roboxes/rhel8
 
@@ -84,7 +86,7 @@ Start a container and attach to its console shell (run in _forground_)
 docker run -i -t --name test roboxes/rhel8
 ```
 
-Start a container and detach it (run in the _background_):
+**Start a container and detach it (run in the _background_):**
 
 ```bash
 #-d Detached mode: Run container in the background, print new container id
@@ -94,14 +96,16 @@ Start a container and detach it (run in the _background_):
 docker run -d -p 8000:8000 --name test roboxes/rhel8 <command> 
 ```
 
-Running proccess with mounted volumes in the host system. (shared volumes)
+**Running proccess with mounted volumes in the host system. (shared volumes):**
 
-__For Refrence:__
+_For Refrence:_
 
-> -v, --volume=[host-src:]container-dest[:<options>]: Bind mount a volume.
-> The comma-delimited `options` are [rw|ro], [z|Z],
-> [[r]shared|[r]slave|[r]private], and [nocopy].
-> The 'host-src' is an absolute path or a name value.
+```
+ -v, --volume=[host-src:]container-dest[:<options>]: Bind mount a volume.
+ The comma-delimited `options` are [rw|ro], [z|Z],
+ [[r]shared|[r]slave|[r]private], and [nocopy].
+ The 'host-src' is an absolute path or a name value.
+```
 
 ```bash
 # Where -v $(pwd)/build:/data specifies host mount is ./build and container mount is at /data
@@ -114,8 +118,8 @@ docker run -it -d \
 ```
 
 
-Create and start container with command `bash`. Allocate a terminal and keep STDIN open, 
-but detach so we dont end up in a shell. 
+**Create and start container with command `bash`. Allocate a terminal and keep STDIN open, but detach so we dont end up in a shell.**
+
 ```bash
 # Where -v $(pwd)/build:/data specifies host mount is ./build and container mount is at /data
 docker run -it -d \
@@ -127,7 +131,7 @@ docker run -it -d \
 
 ```
 
-If we want to attach to a shell of the container we run one of the follwoing
+**If we want to attach to a shell of the container we run one of the follwoing**
 
 ```bash
 docker attach build
@@ -135,13 +139,13 @@ docker attach build
 docker exec -it build bash
 ```
 
-If the container exits for any reason, it can be started again to the original run setting:
+**If the container exits for any reason, it can be started again to the original run setting:**
 
 ```bash
 docker start build
 ```
 
-If the container needs to be stopped or removed, run the following:
+**If the container needs to be stopped or removed, run the following:**
 
 ```bash
 # Stop the container
@@ -149,6 +153,28 @@ docker stop build
 # remove the container
 docker remove build
 ```
+
+**Push a new image to a registry**
+
+First save the new image by finding the container ID (using docker container ls) and then committing it to a new image name. Note that only a-z0-9-_. are allowed when naming images:
+
+```bash
+docker container commit c16378f943fe rhel-httpd:latest
+```
+
+Now, push the image to the registry using the image ID. In this example the registry is on host named registry-host and listening on port 5000. To do this, tag the image with the host name or IP address, and the port of the registry:
+
+```bash
+docker image tag rhel-httpd:latest registry-host:5000/myadmin/rhel-httpd:latest
+docker image push registry-host:5000/myadmin/rhel-httpd:latest
+```
+
+
+There is much more to add here, but for now I want to go into the comparable functions implimented
+via `docker-compose`
+
+## `Docker-compose` Method
+
 
 
 
