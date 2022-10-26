@@ -21,5 +21,5 @@ Repository for a variety of cheat sheets!
 
 ## Ubuntu new install packages
 ```bash
-sudo apt install openvpn nmap binwalk cgcc g++ build-essential net-tools cifs-utils make cmake python python3 python3-pip glances htop
+sudo apt install openssh-server openvpn nmap binwalk gcc g++ build-essential net-tools cifs-utils make cmake python python3 python3-pip glances htop vim zsh gdb curl net-tools tmux byobu
 ```
