@@ -2,7 +2,13 @@
 
 ## Oneliners
 
+
+
+
 ```bash
+# Find a file, and print out file with full ls -l info
+find / -name "<filename>" -exec ls -l {} \;
+
 # see all netcat proccess
 ps -ef | grep "[n]c"
 
