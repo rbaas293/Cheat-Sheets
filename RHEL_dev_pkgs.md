@@ -11,9 +11,10 @@ yum -y install byobu
 ```
 
 ## Oneline
-
+```bash
 yum install \
 "python39-psutil" "perf" "yum-utils" "python39-setuptools" "flex" "vim-enhanced" \
 "autoconf" "sysstat" "gcc-c++" "cmake" "strace" "pcp-zeroconf" \
 "valgrind" "gdb" "ltrace" "glibc-devel" "open-vm-tools" "python39" \
 "make" "systemtap" "python39-toml" "python39-pip" "gcc" "git"
+```
