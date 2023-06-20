@@ -6,6 +6,9 @@
 
 
 ```bash
+# CRLF -> LF file converter. aka dos2unix
+awk '{ sub("\r$", ""); print }' dos.txt > unix.txt
+
 # Find a file, and print out file with full ls -l info
 find / -name "<filename>" -exec ls -l {} \;
 
