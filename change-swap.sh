@@ -1,4 +1,5 @@
 #!/bin/bash
+# Size in GB
 SIZE=$1
 
 re='^[0-9]+$'
